@@ -25,18 +25,22 @@ class ClientesMenu:
     def dar_alta(self):
         alta_win = Toplevel(self.master)
         alta_win.title("Alta de Cliente")
+        alta_win.configure(bg="#f0f4f7")
 
-        Label(alta_win, text="Nombre:").grid(row=0, column=0)
-        nombre_entry = Entry(alta_win)
-        nombre_entry.grid(row=0, column=1)
+        label_font = ("Segoe UI", 11)
+        entry_font = ("Segoe UI", 11)
 
-        Label(alta_win, text="Apellido:").grid(row=1, column=0)
-        apellido_entry = Entry(alta_win)
-        apellido_entry.grid(row=1, column=1)
+        Label(alta_win, text="Nombre:", font=label_font, bg="#f0f4f7").grid(row=0, column=0, padx=10, pady=8, sticky="e")
+        nombre_entry = Entry(alta_win, font=entry_font)
+        nombre_entry.grid(row=0, column=1, padx=10, pady=8)
 
-        Label(alta_win, text="Email:").grid(row=2, column=0)
-        email_entry = Entry(alta_win)
-        email_entry.grid(row=2, column=1)
+        Label(alta_win, text="Apellido:", font=label_font, bg="#f0f4f7").grid(row=1, column=0, padx=10, pady=8, sticky="e")
+        apellido_entry = Entry(alta_win, font=entry_font)
+        apellido_entry.grid(row=1, column=1, padx=10, pady=8)
+
+        Label(alta_win, text="Email:", font=label_font, bg="#f0f4f7").grid(row=2, column=0, padx=10, pady=8, sticky="e")
+        email_entry = Entry(alta_win, font=entry_font)
+        email_entry.grid(row=2, column=1, padx=10, pady=8)
 
         def guardar_cliente():
             nombre = nombre_entry.get()
@@ -52,7 +56,7 @@ class ClientesMenu:
             else:
                 messagebox.showwarning("Campos vacíos", "Todos los campos son obligatorios.")
 
-        Button(alta_win, text="Guardar", command=guardar_cliente).grid(row=3, column=0, columnspan=2)
+        Button(alta_win, text="Guardar", command=guardar_cliente, bg="#1976d2", fg="white", font=label_font, width=15).grid(row=3, column=0, columnspan=2, pady=12)
 
     def dar_baja(self):
         baja_win = Toplevel(self.master)
@@ -132,16 +136,21 @@ class ClientesMenu:
     def listar(self):
         listar_win = Toplevel(self.master)
         listar_win.title("Lista de Clientes")
+        listar_win.configure(bg="#f0f4f7")
+
+        label_font = ("Segoe UI", 11)
 
         clientes = self.cliente_controller.listar_clientes()
-        listbox = Listbox(listar_win, width=60)
-        listbox.pack()
+        listbox = Listbox(listar_win, width=60, font=label_font, bg="#eaf1fb")
+        listbox.pack(padx=10, pady=10)
 
         if clientes:
             for c in clientes:
                 listbox.insert(END, f"Código: {c[0]} | Nombre: {c[1]} | Apellido: {c[2]} | Email: {c[3]}")
         else:
             listbox.insert(END, "No hay clientes registrados.")
+
+        Button(listar_win, text="Cerrar", command=listar_win.destroy, bg="#1976d2", fg="white", font=label_font, width=15).pack(pady=10)
 
     def buscar(self):
         buscar_win = Toplevel(self.master)

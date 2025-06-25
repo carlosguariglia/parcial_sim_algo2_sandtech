@@ -29,8 +29,10 @@ def main():
 
     root = tk.Tk()
     root.title("SandTech - Gestión de Clientes")
-    root.geometry("400x300")
-    
+    root.geometry("500x350")
+    root.configure(bg="#e3eaf2")
+    root.eval('tk::PlaceWindow . center')
+
     app = ClientesMenu(root)
     root.mainloop()
 
