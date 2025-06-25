@@ -83,17 +83,34 @@ class ClientesMenu:
         codigo_entry = Entry(mod_win)
         codigo_entry.grid(row=0, column=1)
 
-        Label(mod_win, text="Nuevo Nombre:").grid(row=1, column=0)
+        # Campos para mostrar y editar
+        Label(mod_win, text="Nombre:").grid(row=1, column=0)
         nombre_entry = Entry(mod_win)
         nombre_entry.grid(row=1, column=1)
 
-        Label(mod_win, text="Nuevo Apellido:").grid(row=2, column=0)
+        Label(mod_win, text="Apellido:").grid(row=2, column=0)
         apellido_entry = Entry(mod_win)
         apellido_entry.grid(row=2, column=1)
 
-        Label(mod_win, text="Nuevo Email:").grid(row=3, column=0)
+        Label(mod_win, text="Email:").grid(row=3, column=0)
         email_entry = Entry(mod_win)
         email_entry.grid(row=3, column=1)
+
+        def cargar_datos():
+            codigo = codigo_entry.get()
+            if codigo:
+                cliente = self.cliente_controller.buscar_cliente(codigo)
+                if cliente:
+                    nombre_entry.delete(0, 'end')
+                    nombre_entry.insert(0, cliente[1])
+                    apellido_entry.delete(0, 'end')
+                    apellido_entry.insert(0, cliente[2])
+                    email_entry.delete(0, 'end')
+                    email_entry.insert(0, cliente[3])
+                else:
+                    messagebox.showwarning("No encontrado", "No se encontró el cliente.")
+            else:
+                messagebox.showwarning("Campo vacío", "Ingrese el código de cliente.")
 
         def modificar_cliente():
             codigo = codigo_entry.get()
@@ -109,7 +126,8 @@ class ClientesMenu:
             else:
                 messagebox.showwarning("Campos vacíos", "Todos los campos son obligatorios.")
 
-        Button(mod_win, text="Modificar", command=modificar_cliente).grid(row=4, column=0, columnspan=2)
+        Button(mod_win, text="Cargar datos", command=cargar_datos).grid(row=0, column=2)
+        Button(mod_win, text="Modificar", command=modificar_cliente).grid(row=4, column=0, columnspan=3)
 
     def listar(self):
         listar_win = Toplevel(self.master)
