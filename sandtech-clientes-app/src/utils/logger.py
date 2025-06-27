@@ -1,22 +1,17 @@
-import logging
-
-# Configure the logger
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler()  # Output logs to console
-    ]
-)
+# Este módulo define funciones para registrar 
+# mensajes de log que saldran por consola 
+# 
+# Mas adelante se puede implementar un logger mas avanzado
+# Incluso con persistencia en archivos o bases de datos
 
 def log_info(message):
-    logging.info(message)
+    print(f"[INFO] {message}")
 
 def log_warning(message):
-    logging.warning(message)
+    print(f"[WARNING] {message}")
 
 def log_error(message):
-    logging.error(message)
+    print(f"[ERROR] {message}")
 
 def log_debug(message):
-    logging.debug(message)
+    print(f"[DEBUG] {message}")

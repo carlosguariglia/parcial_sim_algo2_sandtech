@@ -1,3 +1,2 @@
 Tkinter
 sqlite3
-pytest

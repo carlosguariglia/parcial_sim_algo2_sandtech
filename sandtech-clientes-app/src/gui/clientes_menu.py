@@ -1,5 +1,6 @@
 from tkinter import Tk, Menu, messagebox, Toplevel, Label, Entry, Button, Listbox, END
 from controllers.cliente_controller import ClienteController
+from models.cliente import Cliente  # Asegúrate de importar la clase Cliente
 
 class ClientesMenu:
     def __init__(self, master):
@@ -48,7 +49,8 @@ class ClientesMenu:
             email = email_entry.get()
             if nombre and apellido and email:
                 try:
-                    self.cliente_controller.alta_cliente(nombre, apellido, email)
+                    nuevo_cliente = Cliente(None, nombre, apellido, email)
+                    self.cliente_controller.alta_cliente(nuevo_cliente)
                     messagebox.showinfo("Éxito", "Cliente dado de alta correctamente.")
                     alta_win.destroy()
                 except Exception as e:
@@ -106,11 +108,11 @@ class ClientesMenu:
                 cliente = self.cliente_controller.buscar_cliente(codigo)
                 if cliente:
                     nombre_entry.delete(0, 'end')
-                    nombre_entry.insert(0, cliente[1])
+                    nombre_entry.insert(0, cliente.nombre)
                     apellido_entry.delete(0, 'end')
-                    apellido_entry.insert(0, cliente[2])
+                    apellido_entry.insert(0, cliente.apellido)
                     email_entry.delete(0, 'end')
-                    email_entry.insert(0, cliente[3])
+                    email_entry.insert(0, cliente.email)
                 else:
                     messagebox.showwarning("No encontrado", "No se encontró el cliente.")
             else:
@@ -122,7 +124,8 @@ class ClientesMenu:
             apellido = apellido_entry.get()
             email = email_entry.get()
             if codigo and nombre and apellido and email:
-                if self.cliente_controller.modificar_cliente(codigo, nombre, apellido, email):
+                cliente_mod = Cliente(int(codigo), nombre, apellido, email)
+                if self.cliente_controller.modificar_cliente(cliente_mod):
                     messagebox.showinfo("Éxito", "Cliente modificado correctamente.")
                     mod_win.destroy()
                 else:
@@ -141,12 +144,13 @@ class ClientesMenu:
         label_font = ("Segoe UI", 11)
 
         clientes = self.cliente_controller.listar_clientes()
+        # Ahora clientes es una lista de objetos Cliente
         listbox = Listbox(listar_win, width=60, font=label_font, bg="#eaf1fb")
         listbox.pack(padx=10, pady=10)
 
         if clientes:
             for c in clientes:
-                listbox.insert(END, f"Código: {c[0]} | Nombre: {c[1]} | Apellido: {c[2]} | Email: {c[3]}")
+                listbox.insert(END, f"Código: {c.codigo} | Nombre: {c.nombre} | Apellido: {c.apellido} | Email: {c.email}")
         else:
             listbox.insert(END, "No hay clientes registrados.")
 
@@ -166,7 +170,7 @@ class ClientesMenu:
                 cliente = self.cliente_controller.buscar_cliente(codigo)
                 if cliente:
                     messagebox.showinfo("Cliente encontrado",
-                        f"Código: {cliente[0]}\nNombre: {cliente[1]}\nApellido: {cliente[2]}\nEmail: {cliente[3]}")
+                        f"Código: {cliente.codigo}\nNombre: {cliente.nombre}\nApellido: {cliente.apellido}\nEmail: {cliente.email}")
                     buscar_win.destroy()
                 else:
                     messagebox.showwarning("No encontrado", "No se encontró el cliente.")

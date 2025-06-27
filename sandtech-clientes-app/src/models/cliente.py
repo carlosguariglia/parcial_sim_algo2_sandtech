@@ -1,15 +1,9 @@
 class Cliente:
-    def __init__(self, id_cliente, nombre, contacto):
-        self.id_cliente = id_cliente
+    def __init__(self, codigo, nombre, apellido, email):
+        self.codigo = codigo
         self.nombre = nombre
-        self.contacto = contacto
+        self.apellido = apellido
+        self.email = email
 
     def __str__(self):
-        return f"Cliente(ID: {self.id_cliente}, Nombre: {self.nombre}, Contacto: {self.contacto})"
-
-    def to_dict(self):
-        return {
-            "id_cliente": self.id_cliente,
-            "nombre": self.nombre,
-            "contacto": self.contacto
-        }
+        return f"Cliente(codigo={self.codigo}, nombre={self.nombre}, apellido={self.apellido}, email={self.email})"
