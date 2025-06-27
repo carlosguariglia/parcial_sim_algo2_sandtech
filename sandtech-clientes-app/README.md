@@ -16,12 +16,11 @@ El proyecto está organizado en varias carpetas y archivos, cada uno con una fun
     - **cliente.py**: Clase que representa a un cliente con atributos como id, nombre e información de contacto.
   - **controllers/**: Contiene la lógica de negocio.
     - **cliente_controller.py**: Funciones para añadir, eliminar, modificar y recuperar clientes de la base de datos.
-  - **tests/**: Incluye pruebas unitarias para asegurar el correcto funcionamiento de la aplicación.
-    - **test_db.py**: Pruebas para las operaciones de la base de datos.
-    - **test_clientes.py**: Pruebas para las funciones de gestión de clientes.
   - **utils/**: Funciones utilitarias.
-    - **logger.py**: Proporciona funcionalidad de registro para rastrear eventos y transacciones de la aplicación.
+    - **logger.py**: Proporciona funcionalidad de registro para rastrear eventos y transacciones de la aplicación. por ahora muestra los logs por consola
 
+
+TODO:
 - **diagrams/**: Contiene diagramas que representan la arquitectura del sistema y otros aspectos del diseño.
   - **sistema_general.png**: Diagrama de la arquitectura general del sistema.
   - **paquetes.png**: Ilustra la estructura de paquetes y capas arquitectónicas.
